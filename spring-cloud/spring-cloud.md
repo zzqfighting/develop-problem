@@ -39,3 +39,10 @@ public interface RelationFeign {
 #####在加了configuration还出现
 #####诱发原因2：对同一个FeignClient创建了两个以上的实例
 #####解决办法2：统一为一个FeignClient创建一个实例，或是所有实例均加上configuration
+
+###zuul跨域调用需要认证的接口，重定向到登录接口
+#####原因：header中的内容被过滤，见zuul.sensitive-headers配置
+#####解决办法1：全局设置：zuul.sensitive-headers=
+#####解决办法2：指定路由设置：
++ zuul.routes.\<routeName>.sensitive-headers=
++ zuul.routes.\<routeName>.custom-sensitive-headers=true
